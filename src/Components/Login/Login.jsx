@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStart, loginSuccess, loginFailure } from "../Slices/authSlice";
+//import { loginStart, loginSuccess, loginFailure } from "../Slices/authSlice";
 import { GrLinkedin } from "react-icons/gr";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth);
+  // const dispatch = useDispatch();
+  // const { loading, error } = useSelector((state) => state.auth);
   const [login, setLogin] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
@@ -15,21 +15,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginStart());
-
-    try {
-      const response = await fetch("http://localhost:8080/user/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(login),
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "Login failed");
-      dispatch(loginSuccess({ token: data.token, user: data.user }));
-    } catch (err) {
-      dispatch(loginFailure(err.message));
-    }
-  };
+  }
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -49,11 +35,11 @@ const Login = () => {
               <p>Log In with Linkedin</p>
             </button>
           </div>
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+           <p className="text-red-500 text-sm text-center"></p>
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             <input type="email" name="email" value={login.email} onChange={handleChange} placeholder="Email Id" className="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
             <input type="password" name="password" value={login.password} onChange={handleChange} placeholder="Enter Your Password" className="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
-            <button type="submit" className="w-full py-3 bg-[#D8232A] text-white hover:bg-red-600" disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
+            <button type="submit" className="w-full py-3 bg-[#D8232A] text-white hover:bg-red-600" >Login</button>
           </form>
         </div>
       </div>
