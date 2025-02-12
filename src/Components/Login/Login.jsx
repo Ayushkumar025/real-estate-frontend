@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 //import { loginStart, loginSuccess, loginFailure } from "../Slices/authSlice";
 import { GrLinkedin } from "react-icons/gr";
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
 
 const Login = () => {
   // const dispatch = useDispatch();
@@ -15,6 +16,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      console.log("req login",login)
+      let res=await axios.post("http://localhost:8080/user/login",login,{withCredentials:true})
+      if (res){
+          console.log(res);
+      }
+  } catch (error) {
+      console.log(error);
+      
+  }
   }
 
   return (
