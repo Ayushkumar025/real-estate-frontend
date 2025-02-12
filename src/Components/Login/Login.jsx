@@ -10,8 +10,7 @@ const Login = () => {
   const [login, setLogin] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLogin({ ...login, [name]: value });
+    setLogin({ ...login, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -19,14 +18,14 @@ const Login = () => {
     dispatch(loginStart());
 
     try {
-      // Simulating API call (Replace with actual API call)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      if (login.email === "test@example.com" && login.password === "password") {
-        dispatch(loginSuccess({ email: login.email }));
-      } else {
-        throw new Error("Invalid email or password");
-      }
+      const response = await fetch("http://localhost:8080/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(login),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Login failed");
+      dispatch(loginSuccess({ token: data.token, user: data.user }));
     } catch (err) {
       dispatch(loginFailure(err.message));
     }
@@ -38,10 +37,8 @@ const Login = () => {
         <div className="w-1/2 bg-[#D8232A] flex flex-col justify-center items-center p-6">
           <img src="./Images/internship-portal.webp" alt="Internship Portal" className="w-[600px] h-[600px]" />
         </div>
-
         <div className="w-1/2 p-8">
           <h1 className="text-2xl font-bold text-center mt-4">Log in</h1>
-
           <div className="mt-6 space-y-4">
             <button className="w-full py-3 bg-white text-black border border-gray-400 flex items-center gap-3">
               <FcGoogle size={30} />
@@ -52,38 +49,12 @@ const Login = () => {
               <p>Log In with Linkedin</p>
             </button>
           </div>
-
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-            <input
-              type="email"
-              name="email"
-              value={login.email}
-              onChange={handleChange}
-              placeholder="Email Id"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-            />
-            <input
-              type="password"
-              name="password"
-              value={login.password}
-              onChange={handleChange}
-              placeholder="Enter Your Password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-            />
-            <button
-              type="submit"
-              className="w-full py-3 bg-[#D8232A] text-white hover:bg-red-600"
-              disabled={loading}
-            >
-              {loading ? "Logging in..." : "Login"}
-            </button>
+            <input type="email" name="email" value={login.email} onChange={handleChange} placeholder="Email Id" className="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+            <input type="password" name="password" value={login.password} onChange={handleChange} placeholder="Enter Your Password" className="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+            <button type="submit" className="w-full py-3 bg-[#D8232A] text-white hover:bg-red-600" disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
           </form>
-
-          <p className="text-sm text-center mt-6">
-            Don’t have an account? <a href="#" className="text-[#D8232A] font-semibold hover:underline">Sign up</a>
-          </p>
         </div>
       </div>
     </div>

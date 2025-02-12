@@ -1,30 +1,31 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStart, loginSuccess, loginFailure } from "../Slices/authSlice";
-import { GrLinkedin } from "react-icons/gr";
-import { FcGoogle } from "react-icons/fc";
+import { registerStart, registerSuccess, registerFailure } from "../Slices/authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
-  const [register, setRegister] = useState({ name: "", email: "", password: "" });
+  const [register, setRegister] = useState({ name: "", email: "", password: "", role: "buyer" });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setRegister({ ...register, [name]: value });
+    setRegister({ ...register, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginStart());
+    dispatch(registerStart());
 
     try {
-      // Simulating API call (Replace with actual API)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      dispatch(loginSuccess({ name: register.name, email: register.email }));
+      const response = await fetch("http://localhost:8080/user/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(register),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Registration failed");
+      dispatch(registerSuccess({ token: data.token, user: data.user }));
     } catch (err) {
-      dispatch(loginFailure("Registration failed. Please try again."));
+      dispatch(registerFailure(err.message));
     }
   };
 
@@ -37,57 +38,17 @@ const Register = () => {
 
         <div className="w-1/2 p-8">
           <h1 className="text-2xl font-bold text-center mt-4">Sign-up</h1>
-
-          <div className="mt-6 space-y-4">
-            <button className="w-full py-3 bg-white text-black border border-gray-400 flex items-center gap-3">
-              <FcGoogle size={30} />
-              <p>Sign Up with Google</p>
-            </button>
-            <button className="w-full py-3 bg-white text-black border border-gray-400 flex items-center gap-3">
-              <GrLinkedin size={30} />
-              <p>Sign Up with Linkedin</p>
-            </button>
-          </div>
-
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-            <input
-              type="text"
-              name="name"
-              value={register.name}
-              onChange={handleChange}
-              placeholder="Full Name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-            />
-            <input
-              type="email"
-              name="email"
-              value={register.email}
-              onChange={handleChange}
-              placeholder="Email Id"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-            />
-            <input
-              type="password"
-              name="password"
-              value={register.password}
-              onChange={handleChange}
-              placeholder="Enter Your Password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-            />
-            <button
-              type="submit"
-              className="w-full py-3 bg-[#D8232A] text-white hover:bg-red-600"
-              disabled={loading}
-            >
-              {loading ? "Signing up..." : "Register"}
-            </button>
+            <input type="text" name="name" value={register.name} onChange={handleChange} placeholder="Full Name" className="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+            <input type="email" name="email" value={register.email} onChange={handleChange} placeholder="Email Id" className="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+            <input type="password" name="password" value={register.password} onChange={handleChange} placeholder="Enter Your Password" className="w-full px-4 py-2 border border-gray-300 rounded-lg" required />
+            <select name="role" value={register.role} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller</option>
+            </select>
+            <button type="submit" className="w-full py-3 bg-[#D8232A] text-white hover:bg-red-600" disabled={loading}>{loading ? "Signing up..." : "Register"}</button>
           </form>
-
-          <p className="text-sm text-center mt-6">
-            Already have an account? <a href="#" className="text-[#D8232A] font-semibold hover:underline">Sign in</a>
-          </p>
         </div>
       </div>
     </div>
