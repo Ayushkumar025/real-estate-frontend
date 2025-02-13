@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { store } from "../Redux-Arch/Store";
 import {  registerUser } from "../Redux-Arch/Action";
 import { useNavigate } from "react-router-dom";
 import Login from "../Login/Login";
-//import { useDispatch, useSelector } from "react-redux";
-//import { registerStart, registerSuccess, registerFailure } from "../Slices/authSlice";
+
 
 const Register = () => {
-  // const dispatch = useDispatch();
-  // const { loading, error } = useSelector((state) => state.auth);
+  
 
   const navigate=useNavigate()
 

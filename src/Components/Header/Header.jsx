@@ -1,41 +1,37 @@
 import React from "react";
+import { FaChevronDown } from "react-icons/fa";
 
 const Header = () => {
   return (
     <>
-      <div>
-        <div className="bg-[#D8232A] text-white h-12 flex items-center justify-between px-4 relative">
-          <ul className="flex w-full">
-            <li>REAL-ESTATE</li>
-          </ul>
-          <details className="relative">
-            <summary className="btn m-1 cursor-pointer">Login</summary>
-            <ul className="absolute   top-full mt-0 w-52 left-[-40px] bg-white text-black rounded shadow-lg z-50">
-              <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                Profile
-              </li>
-              <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                Settings
-              </li>
-              <li className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                Logout
-              </li>
-            </ul>
-          </details>
+      <header className="bg-red-600 text-white p-3">
+      <div className="container mx-auto flex justify-between items-center">
+        {/* Logo and Location */}
+        <div className="flex items-center space-x-4">
+          <h1 className="text-xl font-bold">magicbricks</h1>
+          <div className="flex items-center cursor-pointer">
+            <span>Ghaziabad</span>
+            <FaChevronDown className="ml-1 text-sm" />
+          </div>
         </div>
-        <div className="text-black h-10 flex items-center">
-          <ul className="flex justify-evenly w-full px-4">
-            <li>Buy</li>
-            <li>Rent</li>
-            <li>Sell</li>
-            <li>Home Loans</li>
-            <li>Home Interiors</li>
-            <li>Advice</li>
-            <li>Help</li>
-          </ul>
-        </div>
+
+        {/* Navigation Links */}
+        <nav className="flex space-x-6 text-sm">
+          {['Buy', 'Rent', 'Sell', 'Home Loans', 'Home Interiors', 'MB Advice', 'Help', 'MB Prime', 'Login'].map((item, index) => (
+            <div key={index} className="flex items-center cursor-pointer">
+              <span>{item}</span>
+              <FaChevronDown className="ml-1 text-xs text-gray-200" />
+            </div>
+          ))}
+        </nav>
+
+        {/* Post Property Button */}
+        <button className="bg-white text-red-600 px-4 py-1 rounded-full flex items-center font-semibold">
+          Post Property
+          <span className="bg-yellow-400 text-xs font-bold px-2 py-0.5 rounded-full ml-2">FREE</span>
+        </button>
       </div>
-      <hr></hr>
+    </header>
     </>
   );
 };
