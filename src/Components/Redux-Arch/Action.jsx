@@ -55,22 +55,28 @@ const postPropertySuccess = (payload) => ({ type: types.POST_PROPERTY_SUCCESS, p
 const postPropertyFailure = () => ({ type: types.POST_PROPERTY_FAILURE });
 
 export const postProperty = (payload) => {
-  return (dispatch) => {
-    dispatch(postPropertyRequest());
-
-    return axios
-      .post("https://api.example.com/properties", payload, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => {
-        console.log(res.data, "Property posted successfully");
-        dispatch(postPropertySuccess(res.data));
-        return res;
-      })
-      .catch((err) => {
-        console.error(err, "Error while posting property");
-        dispatch(postPropertyFailure());
-        return err;
-      });
+    return (dispatch, getState) => {
+      dispatch(postPropertyRequest());
+  
+      // Get token from the Redux store (assuming it's stored in `auth.token`)
+      const token = getState().auth?.token;  
+  
+      return axios
+        .post("http://localhost:8080/properties/add-properties", payload, {
+          headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}` // Add the token here
+          },
+        })
+        .then((res) => {
+          console.log(res.data, "Property posted successfully");
+          dispatch(postPropertySuccess(res.data));
+          return res;
+        })
+        .catch((err) => {
+          console.error(err, "Error while posting property");
+          dispatch(postPropertyFailure());
+          return err;
+        });
+    };
   };
-};
