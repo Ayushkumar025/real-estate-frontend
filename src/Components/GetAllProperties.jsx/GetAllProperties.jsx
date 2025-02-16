@@ -25,6 +25,7 @@ const GetAllProperties = () => {
               title={property.title}
               description={property.description}
               price={property.price}
+              image={property.images[0]}
             />
           ))
         ) : (
