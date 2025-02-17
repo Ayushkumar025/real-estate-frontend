@@ -24,7 +24,6 @@ const GetAllProperties = () => {
               key={index}
               title={property.title}
               image={property.images.length > 0 ? property.images[0] : "https://via.placeholder.com/300"}
-              description={<span className="hidden md:block">{property.description}</span>}
               propertyType={property.property_type}
               location={property.location}
               price={property.price}
