@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPropertyById } from "../Redux-Arch/Action";
+import Navbar from "../Header/Header";
+import SearchComponent from "../SeachHouse/SearchHouse";
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -22,6 +24,8 @@ const PropertyDetails = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">{property.title}</h1>
       
@@ -72,6 +76,7 @@ const PropertyDetails = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

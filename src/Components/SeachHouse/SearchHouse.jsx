@@ -73,7 +73,7 @@ const SearchComponent = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center px-4 py-6 md:py-12 bg-cover bg-center relative" 
+    <div className="w-full flex flex-col items-center px-4 py-6 md:py-12 bg-cover bg-center"
          style={{ backgroundImage: "url('/Images/bg.jpeg')" }}>
       {/* Header Text */}
       <h2 className="text-2xl md:text-4xl font-bold text-center mb-4">
@@ -114,7 +114,7 @@ const SearchComponent = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Enter Location"
-              className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-yellow-500"
+              className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-yellow-500 z-0"
             />
           </div>
 
@@ -125,7 +125,7 @@ const SearchComponent = () => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               placeholder="Enter Max Price"
-              className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-yellow-500"
+              className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-yellow-500 z-0"
             />
           </div>
 
@@ -136,7 +136,7 @@ const SearchComponent = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by title, description..."
-              className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-yellow-500"
+              className="w-full px-4 py-2 rounded-lg border focus:outline-none focus:border-yellow-500 z-0"
             />
           </div>
         </div>
@@ -145,7 +145,7 @@ const SearchComponent = () => {
         {showDropdown && (
           <div 
             ref={dropdownRef}
-            className="absolute w-full mt-2 bg-white rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto"
+            className="absolute w-full mt-2 bg-white rounded-lg shadow-lg z-40 max-h-96 overflow-y-auto"
           >
             {isLoading ? (
               <div className="p-4 text-center">

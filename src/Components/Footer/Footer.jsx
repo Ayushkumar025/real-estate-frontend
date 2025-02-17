@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="bg-gray-100 py-8 mt-12">
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
         <div>
-          <h3 className="text-lg font-semibold mb-2">About Magicbricks</h3>
+          <h3 className="text-lg font-semibold mb-2">About Luxora Realty</h3>
           <p className="text-gray-600 text-sm">
             As the largest platform connecting property buyers and sellers, ... 
             <a href="#" className="text-blue-500 hover:underline">Read more</a>
@@ -29,7 +29,7 @@ const Footer = () => {
       </div>
       <div className="mt-6 border-t pt-4 text-center text-gray-600 text-sm">
         <p>
-          All trademarks, logos, and names are properties of their respective owners. &copy; 2025 Magicbricks Realty Services Limited.
+          All trademarks, logos, and names are properties of their respective owners. &copy; 2025 Luxora Realty Services Limited.
         </p>
       </div>
     </footer>

@@ -12,10 +12,12 @@ const Navbar = () => {
   return (
     <>
       <div className="flex items-center justify-between py-5 font-medium ">
+        <Link to="/">
         <div className="flex items-center justify-center gap-2">
           <img src="/Images/logo.webp" alt="company-logo" className="w-[40px] rounded-full"/>
           <h4 className="hidden sm:flex">LUXORA REALTY</h4>
         </div>
+        </Link>
 
         <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
           <NavLink to="/" className="flex flex-col items-center gap-1">
@@ -55,7 +57,7 @@ const Navbar = () => {
               <CiUser size={20} />
             </div>
             <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4">
-              <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
+              <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded" style={{ zIndex: 999 }}>
                 <p className="cursor-pointer hover:text-black">My Profile</p>
                 <p className="cursor-pointer hover:text-black">Orders</p>
                 <p className="cursor-pointer hover:text-black">Logout</p>
@@ -90,7 +92,7 @@ const Navbar = () => {
           <div className="flex flex-col text-gray-600">
             <div
               onClick={() => setVisible(false)}
-              className="flex items-center gap-4 p-3"
+              className="flex items-center gap-4 p-3 z-50"
             >
               <span className="h-4 rotate-270">
                 <IoIosArrowDropdown />
