@@ -80,3 +80,52 @@ export const postProperty = (payload) => {
         });
     };
   };
+
+  export const searchProperties = (searchParams) => {
+    return (dispatch) => {
+      dispatch({ type: types.SEARCH_PROPERTIES_REQUEST });
+  
+      // Convert price to number if it exists
+      if (searchParams.price) {
+        searchParams.price = Number(searchParams.price);
+      }
+  
+      return axios
+        .get("http://localhost:8080/properties/searchProperties", { 
+          params: {
+            location: searchParams.location || '',
+            property_type: searchParams.property_type || '',
+            price: searchParams.price || '',
+            query: searchParams.query || ''
+          }
+        })
+        .then((res) => {
+          console.log("Search results:", res.data);
+          dispatch({ type: types.SEARCH_PROPERTIES_SUCCESS, payload: res.data });
+          return res.data;
+        })
+        .catch((err) => {
+          console.error("Search error:", err);
+          dispatch({ type: types.SEARCH_PROPERTIES_FAILURE });
+          return err;
+        });
+    };
+  };
+  
+  export const getPropertyById = (id) => {
+    return (dispatch) => {
+      dispatch({ type: types.GET_PROPERTY_BY_ID_REQUEST });
+  
+      return axios
+        .get(`http://localhost:8080/properties/getPropertyById/${id}`)
+        .then((res) => {
+          dispatch({ type: types.GET_PROPERTY_BY_ID_SUCCESS, payload: res.data });
+          return res.data;
+        })
+        .catch((err) => {
+          dispatch({ type: types.GET_PROPERTY_BY_ID_FAILURE });
+          console.error("Property fetch error:", err);
+          return err;
+        });
+    };
+  };

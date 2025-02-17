@@ -23,9 +23,10 @@ const GetAllProperties = () => {
             <CustomCard
               key={index}
               title={property.title}
-              description={property.description}
+              image={property.images.length > 0 ? property.images[0] : "https://via.placeholder.com/300"}
+              propertyType={property.property_type}
+              location={property.location}
               price={property.price}
-              image={property.images[0]}
             />
           ))
         ) : (
