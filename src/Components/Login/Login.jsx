@@ -19,7 +19,7 @@ const Login = () => {
       let res = await axios.post("http://localhost:8080/user/login", login, { withCredentials: true });
       console.log('Login response:', res);
       if(res){
-        navigate("/")
+        navigate("/home")
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -90,6 +90,15 @@ const Login = () => {
             >
               Login
             </button>
+            <div className="mt-4 text-center">
+              <a href="/forgot-password" className="text-blue-500 hover:underline">
+                Forgot Password?
+              </a>
+              <span className="mx-2">|</span>
+              <a href="/reset-password" className="text-blue-500 hover:underline">
+                Reset Password
+              </a>
+          </div>
           </form>
         </div>
       </div>
