@@ -18,8 +18,10 @@ const Login = () => {
       console.log('Sending login request:', login);
       let res = await axios.post("http://localhost:8080/user/login", login, { withCredentials: true });
       console.log('Login response:', res);
-      if(res){
-        navigate("/home")
+      if (res && res.data.token) {
+        localStorage.setItem('authToken', res.data.token);
+
+        navigate("/");
       }
     } catch (error) {
       console.error('Login error:', error);

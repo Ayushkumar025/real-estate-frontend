@@ -1,53 +1,38 @@
-import React, { useState } from 'react'
+// src/pages/ForgotPassword.jsx
+import { useState } from "react";
+import axios from "axios";
 
-const ForgetPassword = () => {
-    const [email, setEmail] = useState("");
+export default function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Password reset link sent to:", email);
-    
+    try {
+      const res = await axios.post("http://localhost:8080/user/forgot-passward", { email });
+      setMessage(res.data.message);
+    } catch (error) {
+      setMessage(error.response?.data?.message || "Something went wrong!");
+    }
   };
 
-
   return (
-    <>
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-semibold text-center mb-4">
-          Forgot Password?
-        </h2>
-        <p className="text-gray-600 text-center mb-4">
-          Enter your email to receive a reset link.
-        </p>
-
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 font-medium">
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Send Reset Link
-          </button>
-        </form>
-      </div>
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Forgot Password</h2>
+      <form onSubmit={handleSubmit}>
+        <label className="block mb-2">Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="w-full p-2 border rounded"
+        />
+        <button type="submit" className="mt-4 bg-blue-500 text-white p-2 rounded">
+          Send Reset Link
+        </button>
+      </form>
+      {message && <p className="mt-4 text-red-500">{message}</p>}
     </div>
-    </>
-  )
+  );
 }
-
-export default ForgetPassword
