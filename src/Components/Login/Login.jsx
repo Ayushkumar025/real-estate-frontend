@@ -17,9 +17,22 @@ const Login = () => {
     try {
       console.log('Sending login request:', login);
       let res = await axios.post("http://localhost:8080/user/login", login, { withCredentials: true });
-      console.log('Login response:', res);
-      if(res){
-        navigate("/")
+      // console.log('Login response:', res);
+      // console.log('Login response:', res.data.user.role);
+      // console.log('Login response:', res.data.token);
+      if(res.data.user.role==="admin"){
+        localStorage.setItem("adminToken",res.data.token)
+        navigate('/admin')
+      }
+      if (res.data.user.role==="buyer") {
+        localStorage.setItem('userToken',res.data.token);
+
+        navigate("/");
+      }
+      if (res.data.user.role==="seller") {
+        localStorage.setItem('sellerToken',res.data.token);
+
+        navigate("/seller");
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -76,10 +89,11 @@ const Login = () => {
               required
             />
             <input
-              type="password"
+              type="Password"
               name="password"
               value={login.password}
               onChange={handleChange}
+            
               placeholder="Enter Your Password"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D8232A]"
               required
@@ -90,6 +104,15 @@ const Login = () => {
             >
               Login
             </button>
+            <div className="mt-4 text-center">
+              <a href="/forgot-password" className="text-blue-500 hover:underline">
+                Forgot Password?
+              </a>
+              <span className="mx-2">|</span>
+              <a href="/reset-password" className="text-blue-500 hover:underline">
+                Reset Password
+              </a>
+          </div>
           </form>
         </div>
       </div>

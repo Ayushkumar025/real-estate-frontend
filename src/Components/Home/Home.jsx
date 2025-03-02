@@ -27,7 +27,7 @@ const Home = () => {
         </div>
       </div>
       <GetAllProperties/>
-      <PostSellerProperty/>
+      {/* <PostSellerProperty/> */}
       <Footer/>
     </>
   )
