@@ -1,4 +1,3 @@
-// src/pages/ResetPassword.jsx
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -18,8 +17,9 @@ export default function ResetPassword() {
     }
 
     try {
-      const res = await axios.post(`http://localhost:8080/user/reset-password/${token}`, {
+      const res = await axios.patch(`http://localhost:8080/user/reset-password/${token}`, {
         password,
+        email: "mukesh567kemar@gmail.com" // Replace with the actual email
       });
       setMessage(res.data.message);
       setTimeout(() => navigate("/login"), 3000);

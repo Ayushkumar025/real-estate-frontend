@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const AddProperty = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("authToken");
-  console.log(token);
-  
 
   
   const [formData, setFormData] = useState({
@@ -42,7 +39,7 @@ const AddProperty = () => {
     
 
     try {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem("sellerToken");
       const formDataToSend = new FormData();
 
       formDataToSend.append('title', formData.title);

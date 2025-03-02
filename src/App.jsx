@@ -25,7 +25,7 @@ function App() {
         <Route path="/UnverifiedSellers" element={<AdminUnVerifySeller />} />
         <Route path="/VerifiedSellers" element={<VerifiedSellers />} />
         <Route path="/GetAllProperties" element={<GetAllProperties />}/>
-        <Route path="/AddProperty" element={<AddProperty />} />
+        <Route path="/seller" element={<AddProperty />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/user/reset-password/:token" element={<ResetPassword />} />
       </Routes>
