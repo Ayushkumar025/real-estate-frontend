@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import Navbar from '../Header/Header';
 
 const AddProperty = () => {
   const navigate = useNavigate();
@@ -74,7 +76,9 @@ const AddProperty = () => {
 
 
   return (
-    <div className="flex justify-center items-center  bg-gray-100">
+    <>
+    <Navbar/>
+    <div className="flex justify-center items-center">
       <div className="bg-white p-10 shadow-lg rounded-lg w-full max-w-lg">
         <h1 className="text-3xl font-bold text-center mb-6">Add Property</h1>
 
@@ -200,6 +204,8 @@ const AddProperty = () => {
         </form>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

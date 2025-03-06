@@ -10,6 +10,7 @@ import AdminUnVerifySeller from "./Components/Admin/GetAllUnverifiedSeller";
 import AddProperty from "./Components/Seller/AddProperty";
 import ForgotPassword from "./Components/Login/ForgetPassword";
 import ResetPassword from "./Components/Login/ResetPassword";
+import Contact from "./Components/Contact/Contact";
 
 
 function App() {
@@ -24,10 +25,11 @@ function App() {
         <Route path="/admin" element={<RealEstateAdminDashboard />} />
         <Route path="/UnverifiedSellers" element={<AdminUnVerifySeller />} />
         <Route path="/VerifiedSellers" element={<VerifiedSellers />} />
-        <Route path="/GetAllProperties" element={<GetAllProperties />}/>
+        <Route path="/properties" element={<GetAllProperties />}/>
         <Route path="/seller" element={<AddProperty />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/user/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/contact" element={<Contact/>} />
       </Routes>
     </BrowserRouter>
     </div>

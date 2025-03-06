@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import AdminNavBar from './Header';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 export default function GetAllProperties() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const fetchProperties = async () => {
     try {
@@ -18,6 +22,10 @@ export default function GetAllProperties() {
     }
   };
 
+  const handleProperty = (Id) => {
+    navigate(`/property/${Id}`);
+  };
+
   useEffect(() => {
     fetchProperties();
   }, []);
@@ -27,7 +35,7 @@ export default function GetAllProperties() {
 
   return (
     <>
-      <AdminNavBar />
+      <Navbar/>
       <div className="p-6 bg-gray-50 min-h-screen">
         <h1 className="text-3xl font-bold mb-6 text-gray-800">All Properties</h1>
         {properties.length === 0 ? (
@@ -57,11 +65,13 @@ export default function GetAllProperties() {
                   </span>
                 </div>
                 <p className="text-gray-500 mt-2">Type: {property.property_type}</p>
+                <button className="bg-yellow-100 p-2 text-sm text-amber-500 rounded-2xl mt-2 cursor-pointer" onClick={() => handleProperty(property._id)}>View Property</button>
               </div>
             ))}
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 }

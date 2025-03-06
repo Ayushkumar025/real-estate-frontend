@@ -25,14 +25,14 @@ const Navbar = () => {
             <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
           </NavLink>
           <NavLink
-            to="/"
+            to="/properties"
             className="flex flex-col items-center gap-1"
           >
             <p>BUY HOUSES</p>
             <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
           </NavLink>
           <NavLink
-            to="/"
+            to="/seller"
             className="flex flex-col items-center gap-1"
           >
             <p>SOLD HOUSES</p>
@@ -42,7 +42,7 @@ const Navbar = () => {
             <p>ABOUT</p>
             <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
           </NavLink>
-          <NavLink to="/" className="flex flex-col items-center gap-1">
+          <NavLink to="/contact" className="flex flex-col items-center gap-1">
             <p>CONTACT</p>
             <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
           </NavLink>
@@ -64,15 +64,6 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-
-          <Link to="/cart" className="relative">
-            <div className="w-5 min-w-5">
-              <CiShoppingCart size={20} />
-            </div>
-            <p className="absolute right-[-10px] bottom-[-4px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
-              10
-            </p>
-          </Link>
 
           <span
             onClick={() => setVisible(true)}
@@ -100,9 +91,9 @@ const Navbar = () => {
               <p>Back</p>
             </div>
             <NavLink onClick={()=>setVisible(false)} className="py-2 pl-6 border border-l-0 border-r-0" to="/">HOME</NavLink>
-            <NavLink onClick={()=>setVisible(false)} className="py-2 pl-6 border border-t-0 border-l-0 border-r-0" to="/">BUY HOUSES</NavLink>
+            <NavLink onClick={()=>setVisible(false)} className="py-2 pl-6 border border-t-0 border-l-0 border-r-0" to="/properties">BUY HOUSES</NavLink>
             <NavLink onClick={()=>setVisible(false)} className="py-2 pl-6 border border-t-0 border-l-0 border-r-0" to="/">ABOUT</NavLink>
-            <NavLink onClick={()=>setVisible(false)} className="py-2 pl-6 border border-t-0 border-l-0 border-r-0" to="/">CONTACT</NavLink>
+            <NavLink onClick={()=>setVisible(false)} className="py-2 pl-6 border border-t-0 border-l-0 border-r-0" to="/contact">CONTACT</NavLink>
           </div>
         </div>
       </div>

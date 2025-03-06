@@ -1,11 +1,13 @@
 import React from 'react'
-import Header from '../Header/Header'
+
 import SearchHouse from '../SeachHouse/SearchHouse'
 import Footer from '../Footer/Footer'
 import PopularProperties from '../PopularProperties/PopularProperties'
 import GetAllProperties from '../GetAllProperties.jsx/GetAllProperties'
 import PostSellerProperty from '../PostProperty/PostProperty.jsx'
 import Carousel from '../Carousel/Carousel.jsx'
+import Navbar from '../Header/Header.jsx'
+import Customer from '../Customer/Customer.jsx'
 
 const Home = () => {
 
@@ -19,15 +21,19 @@ const Home = () => {
 
   return (
     <>
-      <Header/>
+      <Navbar/>
       <SearchHouse/>
       <div>
         <div className="m-5 mb-20 flex justify-center items-center">
           <Carousel images={imageArray} />
         </div>
       </div>
-      <GetAllProperties/>
-      {/* <PostSellerProperty/> */}
+      <div className="m-5 mb-20 flex justify-center items-center mt-10">
+          <Customer/>
+      </div>
+      <div className='hidden'>
+        <GetAllProperties/>
+      </div>
       <Footer/>
     </>
   )

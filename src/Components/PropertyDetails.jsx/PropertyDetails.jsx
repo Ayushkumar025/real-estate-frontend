@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPropertyById } from "../Redux-Arch/Action";
 import Navbar from "../Header/Header";
 import SearchComponent from "../SeachHouse/SearchHouse";
+import Footer from "../Footer/Footer";
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -76,6 +77,7 @@ const PropertyDetails = () => {
         </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 };
